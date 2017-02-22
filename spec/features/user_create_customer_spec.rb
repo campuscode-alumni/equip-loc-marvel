@@ -33,11 +33,11 @@ feature 'User create customer' do
     expect(page).to have_content(customer.contact_name)
     expect(page).to have_content(customer.phone_number)
     expect(page).to have_content(customer.state_registration)
+    expect(page).not_to have_css('strong', text: 'Vip')
 
   end
 
-  scenario 'User customer vip' do
-
+  scenario 'vip' do
     customer = Customer.new(name: 'João Almeida',
                             customer_type: 'Pessoa física',
                             document: '423.235.958-30',
@@ -72,6 +72,15 @@ feature 'User create customer' do
     expect(page).to have_content(customer.state_registration)
     expect(page).to have_css('strong', text: 'Vip')
 
-  end
 
+  end
+  scenario 'valid empty field' do
+
+    visit new_customer_path
+
+    click_on 'Cadastrar Cliente'
+
+    expect(page).to have_content('Não foi possivel cadastrar cliente.
+                                  Preencha os campos em branco.')
+  end
 end
