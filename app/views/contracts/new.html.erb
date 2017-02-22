@@ -1,0 +1,34 @@
+<h2>Emissão de Contrato</h2>
+
+<%= simple_form_for @contract do |f| %>
+  <div>
+    <%= f.input :client, label: 'Cliente' %>
+  </div>
+  <div>
+    <%= f.input :equipment, label: 'Equipamentos' %>
+  </div>
+  <div>
+    <%= f.input :rental_period, label: 'Prazo de locação' %>
+  </div>
+  <div>
+    <%= f.input :amount, label: 'Valor de locação' %>
+  </div>
+  <div>
+    <%= f.input :discount, label: 'Desconto' %>
+  </div>
+  <div>
+    <%= f.input :delivery_address, label: 'Endereço de entrega' %>
+  </div>
+  <div>
+    <%= f.input :contact, label: 'Responsável pela obra' %>
+  </div>
+  <div>
+    <%= f.input :payment_method, label: 'Forma de pagamento' %>
+  </div>
+  <div>
+    <%= f.input :start_date, label: 'Data de início', as: :string %>
+  </div>
+  <div>
+    <%= f.submit 'Emitir Contrato' %>
+  </div>
+<% end %>

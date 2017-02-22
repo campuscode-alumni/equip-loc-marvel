@@ -12,6 +12,22 @@
 
 ActiveRecord::Schema.define(version: 20170222005556) do
 
+  create_table "contracts", force: :cascade do |t|
+    t.string   "client"
+    t.string   "equipment"
+    t.integer  "rental_period"
+    t.float    "amount"
+    t.float    "discount"
+    t.float    "total_amount"
+    t.string   "delivery_address"
+    t.string   "contact"
+    t.string   "payment_method"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
   create_table "customers", force: :cascade do |t|
     t.string   "name"
     t.string   "customer_type"
@@ -24,6 +40,21 @@ ActiveRecord::Schema.define(version: 20170222005556) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.boolean  "vip"
+  end
+
+  create_table "equipment", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "serial_number"
+    t.decimal  "acquisition_value"
+    t.datetime "acquisition_date"
+    t.integer  "shelf_life"
+    t.string   "picture"
+    t.string   "equipment_type"
+    t.string   "manufacture"
+    t.string   "vendor"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
 end

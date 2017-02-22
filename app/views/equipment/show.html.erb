@@ -1,0 +1,22 @@
+
+<h1> <%= @equipment.name %> </h1>
+<dl>
+  <dt>Descrição</dt>
+    <dd> <%= @equipment.description %> </dd>
+  <dt>Número de Série</dt>
+    <dd><%= @equipment.serial_number %></dd>
+  <dt>Valor de Aquisição</dt>
+    <dd><%= @equipment.acquisition_value %></dd>
+  <dt>Data da Aquisição</dt>
+    <dd><%= @equipment.acquisition_date %></dd>
+  <dt>Vida Útil</dt>
+    <dd><%= @equipment.shelf_life %></dd>
+  <dt>Foto</dt>
+    <dd><%= @equipment.picture %></dd>
+  <dt>Tipo do Equipamento</dt>
+    <dd><%= @equipment.equipment_type %></dd>
+  <dt>Fabricante</dt>
+    <dd><%= @equipment.manufacture %></dd>
+  <dt>Fornecedor</dt>
+    <dd><%= @equipment.vendor %></dd>
+</dl>
