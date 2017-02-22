@@ -1,26 +1,45 @@
 <%= flash[:notice] %>
-
+<h1>Novo Equipamento</h1>
 <%= form_for @equipment do |f| %>
-<%= f.label :name, 'Nome' %>
-<%= f.text_field :name %>
-<%= f.label :description, 'Descrição' %>
-<%= f.text_field :description %>
-<%= f.label :serial_number, 'Número de Série' %>
-<%= f.text_field :serial_number %>
-<%= f.label :acquisition_value, 'Valor de Aquisição' %>
-<%= f.text_field :acquisition_value %>
-<%= f.label :acquisition_date, 'Data de Aquisição' %>
-<%= f.text_field :acquisition_date %>
-<%= f.label :shelf_life, 'Vida Útil' %>
-<%= f.text_field :shelf_life %>
-<%= f.label :picture, 'Foto' %>
-<%= f.text_field :picture %>
-<%= f.label :equipment_type, 'Tipo do Equipamento' %>
-<%= f.text_field :equipment_type %>
-<%= f.label :manufacture, 'Fabricante' %>
-<%= f.text_field :manufacture %>
-<%= f.label :vendor, 'Fornecedor' %>
-<%= f.text_field :vendor %>
-<%= f.submit 'Cadastrar Equipamento' %>
-
+  <div>
+    <%= f.label :name, 'Nome' %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :description, 'Descrição' %>
+    <%= f.text_field :description %>
+  </div>
+  <div>
+    <%= f.label :serial_number, 'Número de Série' %>
+    <%= f.text_field :serial_number %>
+  </div>
+  <div>
+    <%= f.label :acquisition_value, 'Valor de Aquisição' %>
+    <%= f.text_field :acquisition_value %>
+  </div>
+  <div>
+    <%= f.label :acquisition_date, 'Data de Aquisição' %>
+    <%= f.text_field :acquisition_date %>
+  </div>
+  <div>
+    <%= f.label :shelf_life, 'Vida Útil' %>
+    <%= f.text_field :shelf_life %>
+  </div>
+  <div>
+    <%= f.label :picture, 'Foto' %>
+    <%= f.text_field :picture %>
+  </div>
+  <div>
+    <%= f.label :equipment_type, 'Tipo do Equipamento' %>
+    <%= f.text_field :equipment_type %>
+  </div>
+  <div>
+    <%= f.label :manufacture, 'Fabricante' %>
+    <%= f.text_field :manufacture %>
+  </div>
+  <div>
+    <%= f.label :vendor, 'Fornecedor' %>
+    <%= f.text_field :vendor %>
+  </div>
+  <%= f.submit 'Cadastrar Equipamento' %>
 <%end%>
