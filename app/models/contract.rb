@@ -1,5 +1,7 @@
 class Contract < ApplicationRecord
 
+  validates :client, :equipment, :rental_period, :amount, :delivery_address, :contact, :payment_method, :start_date, presence: {message: 'Informação obrigatória.'}
+
   before_save :evaluate_total_amount
   before_save :evaluate_end_date
 

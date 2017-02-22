@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 feature 'User issues contract' do
+
   scenario 'successfully' do
     contract = Contract.new(
       client: 'Odebrecht',
@@ -30,7 +31,7 @@ feature 'User issues contract' do
 
     click_on 'Emitir Contrato'
 
-    expect(page).to have_css('h1', text: contract.client)
+    expect(page).to have_css('h2', text: contract.client)
     expect(page).to have_content(contract.equipment)
     expect(page).to have_content(contract.rental_period)
     expect(page).to have_content(contract.amount)
@@ -43,4 +44,15 @@ feature 'User issues contract' do
     expect(page).to have_content(Time.zone.today.to_s)
     expect(page).to have_content((contract.start_date + contract.rental_period.days).to_s)
   end
+
+  scenario 'with no data' do
+
+    visit root_path
+    click_on 'Novo Contrato'
+    click_on 'Emitir Contrato'
+
+    expect(page).to have_content('Informação obrigatória.')
+
+  end
+
 end
