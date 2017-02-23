@@ -2,6 +2,7 @@ class ContractsController < ApplicationController
 
   def new
     @contract = Contract.new
+    @equipment = Equipment.all
   end
 
   def create
@@ -9,6 +10,7 @@ class ContractsController < ApplicationController
     if @contract.save
       redirect_to @contract
     else
+      @equipment = Equipment.all
       render 'new'
     end
   end
@@ -21,9 +23,10 @@ class ContractsController < ApplicationController
 
   def contract_params
     params.require(:contract).permit(
-      :client, :equipment, :rental_period,
+      :client, :rental_period,
       :amount, :discount, :delivery_address,
-      :contact, :payment_method, :start_date
+      :contact, :payment_method, :start_date,
+      equipment_ids: []
     )
   end
 
