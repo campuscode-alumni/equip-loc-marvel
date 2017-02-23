@@ -1,0 +1,17 @@
+<%= flash[:notice] %>
+<%= form_for @price do |f|%>
+  <div>
+    <%= f.label :rental_period, 'Prazo De Locação' %>
+    <%= f.text_field :rental_period %>
+  </div>
+  <div>
+    <%= f.label :equipment_type_id, 'Tipo do Equipamento'%>
+    <%= f.collection_select(:equipment_type_id, EquipmentType.all,
+        :id, :name) %>
+  </div>
+  <div>
+    <%= f.label :price, 'Preço' %>
+    <%= f.text_field :price %>
+  </div>
+  <%= f.submit 'Cadastrar Preço' %>
+<% end %>

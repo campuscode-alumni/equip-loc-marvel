@@ -5,7 +5,7 @@
     <%= f.input :client, label: 'Cliente' %>
   </div>
   <div>
-    <%= f.input :equipment, label: 'Equipamentos' %>
+    <%= f.association :equipment, as: :check_boxes, collection: @equipment, label_method: :name, value_method: :id %>
   </div>
   <div>
     <%= f.input :rental_period, label: 'Prazo de locação' %>
