@@ -4,41 +4,57 @@ feature 'User issues contract' do
 
   scenario 'successfully' do
 
-    equip1 = Equipment.create(name: 'Furadeira',
-                          description: 'Furadeira Bonita',
-                          serial_number: '0001',
-                          acquisition_value: '5000',
-                          acquisition_date: '2017-02-21',
-                          shelf_life: '5 anos',
-                          picture: 'img/furadeira',
-                          equipment_type: 'alta precisão',
-                          manufacture: 'bosch',
-                          vendor: 'Zezinho')
+    equip1 = Equipment.create(
+      name: 'Furadeira',
+      description: 'Furadeira Bonita',
+      serial_number: '0001',
+      acquisition_value: '5000',
+      acquisition_date: '2017-02-21',
+      shelf_life: '5 anos',
+      picture: 'img/furadeira',
+      equipment_type: 'alta precisão',
+      manufacture: 'bosch',
+      vendor: 'Zezinho'
+    )
 
-    equip2 = Equipment.create(name: 'Betoneira',
-                          description: 'Betoneira Super Gigante',
-                          serial_number: '8888',
-                          acquisition_value: '10000',
-                          acquisition_date: '1984-05-14',
-                          shelf_life: '48 anos',
-                          picture: 'img/betoneira',
-                          equipment_type: 'Altérrima Performance',
-                          manufacture: 'DeWalt',
-                          vendor: 'Tio Sam')
+    equip2 = Equipment.create(
+      name: 'Betoneira',
+      description: 'Betoneira Super Gigante',
+      serial_number: '8888',
+      acquisition_value: '10000',
+      acquisition_date: '1984-05-14',
+      shelf_life: '48 anos',
+      picture: 'img/betoneira',
+      equipment_type: 'Altérrima Performance',
+      manufacture: 'DeWalt',
+      vendor: 'Tio Sam'
+    )
 
-    equip3 = Equipment.create(name: 'Escavadeira',
-                          description: 'Cava buraco até a China',
-                          serial_number: '1234',
-                          acquisition_value: '986.14',
-                          acquisition_date: '2016-04-01',
-                          shelf_life: '13 anos',
-                          picture: 'img/escavadeira',
-                          equipment_type: 'Mágico',
-                          manufacture: 'Caterpillar',
-                          vendor: 'Mappin')
+    equip3 = Equipment.create(
+      name: 'Escavadeira',
+      description: 'Cava buraco até a China',
+      serial_number: '1234',
+      acquisition_value: '986.14',
+      acquisition_date: '2016-04-01',
+      shelf_life: '13 anos',
+      picture: 'img/escavadeira',
+      equipment_type: 'Mágico',
+      manufacture: 'Caterpillar',
+      vendor: 'Mappin'
+    )
+
+    customer = Customer.create(
+      name: 'Odebrecht',
+      customer_type: 'Pessoa física',
+      document: '423.235.958-30',
+      adress: 'Av paulista 2000',
+      email: 'joaoalmeida@gmail.com',
+      contact_name: 'Jonas Souza',
+      phone_number: '11995432255',
+      state_registration: '159632'
+    )
 
     contract = Contract.create(
-      client: 'Odebrecht',
       rental_period: 3,
       amount: 30000,
       discount: 100,
@@ -52,7 +68,7 @@ feature 'User issues contract' do
 
     click_on 'Novo Contrato'
 
-    fill_in 'Cliente', with: contract.client
+    select(customer.name, :from => 'Cliente')
     fill_in 'Prazo de locação', with: contract.rental_period
     fill_in 'Valor de locação', with: contract.amount
     fill_in 'Desconto', with: contract.discount
@@ -66,7 +82,7 @@ feature 'User issues contract' do
 
     click_on 'Emitir Contrato'
 
-    expect(page).to have_css('h2', text: contract.client)
+    expect(page).to have_css('h2', text: customer.name)
     expect(page).to have_content(contract.rental_period)
     expect(page).to have_content(contract.amount)
     expect(page).to have_content(contract.discount)

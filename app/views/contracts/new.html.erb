@@ -2,7 +2,7 @@
 
 <%= simple_form_for @contract do |f| %>
   <div>
-    <%= f.input :client, label: 'Cliente' %>
+    <%= f.input :customer_id, label: 'Cliente', collection: @customers %>
   </div>
   <div>
     <%= f.association :equipment, as: :check_boxes, collection: @equipment, label_method: :name, value_method: :id %>
