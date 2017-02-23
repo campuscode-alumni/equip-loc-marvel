@@ -1,0 +1,51 @@
+<h1>Visualização de Contrato</h1>
+
+<h2>
+  Cliente:
+  <%= @contract.client %>
+</h2>
+
+<div>
+  Equipamentos:
+  <%= @contract.equipment %>
+</div>
+<div>
+ Prazo de locação:
+  <%= @contract.rental_period %>
+</div>
+<div>
+  Valor de locação:
+  <%= @contract.amount %>
+</div>
+<div>
+  Desconto:
+  <%= @contract.discount %>
+</div>
+<div>
+  Valor Final:
+  <%= @contract.total_amount %>
+</div>
+<div>
+  Endereço de entrega:
+  <%= @contract.delivery_address %>
+</div>
+<div>
+  Responsável pela obra:
+  <%= @contract.contact %>
+</div>
+<div>
+  Forma de pagamento:
+  <%= @contract.payment_method %>
+</div>
+<div>
+  Data de início:
+  <%= @contract.start_date %>
+</div>
+<div>
+  Data de emissão:
+  <%= @contract.created_at.to_s %>
+</div>
+<div>
+  Data de fim:
+  <%= @contract.end_date %>
+</div>

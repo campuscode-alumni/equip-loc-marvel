@@ -12,6 +12,36 @@
 
 ActiveRecord::Schema.define(version: 20170222231147) do
 
+  create_table "contracts", force: :cascade do |t|
+    t.string   "client"
+    t.string   "equipment"
+    t.integer  "rental_period"
+    t.float    "amount"
+    t.float    "discount"
+    t.float    "total_amount"
+    t.string   "delivery_address"
+    t.string   "contact"
+    t.string   "payment_method"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "customer_type"
+    t.string   "document"
+    t.string   "adress"
+    t.string   "email"
+    t.string   "contact_name"
+    t.string   "phone_number"
+    t.string   "state_registration"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.boolean  "vip"
+  end
+
   create_table "equipment", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
