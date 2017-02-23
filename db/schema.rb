@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170221225811) do
+ActiveRecord::Schema.define(version: 20170222231147) do
 
   create_table "equipment", force: :cascade do |t|
     t.string   "name"
@@ -25,6 +25,21 @@ ActiveRecord::Schema.define(version: 20170221225811) do
     t.string   "vendor"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+  end
+
+  create_table "equipment_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "prices", force: :cascade do |t|
+    t.integer  "rental_period"
+    t.integer  "equipment_type_id"
+    t.decimal  "price"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["equipment_type_id"], name: "index_prices_on_equipment_type_id"
   end
 
 end
