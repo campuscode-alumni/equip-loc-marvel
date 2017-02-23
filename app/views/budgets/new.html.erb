@@ -2,6 +2,11 @@
 
 <%= form_for(@budget) do |f| %>
   <%= f.label :name, 'Nome'  %> <%= f.text_field :name  %>
-
-
+  <%= f.label :contact_number, 'Telefone'  %> <%= f.text_field :contact_number  %>
+  <%= f.label :email, 'Email'  %> <%= f.text_field :email  %>
+  <%= f.label :description, 'Descrição'  %> <%= f.text_field :description  %>
+  <%= f.submit 'Enviar Orçamento'  %>
+  <%= flash[:error] %>
 <% end %>
+
+<%= link_to 'Voltar', root_path %>
