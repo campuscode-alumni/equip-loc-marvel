@@ -7,7 +7,11 @@
 
 <div>
   Equipamentos:
-  <%= @contract.equipment %>
+  <% @contract.equipment.each do |e| %>
+    <%= e.name %>
+    <%= e.acquisition_value %>
+    <%= e.serial_number %>
+  <% end %>
 </div>
 <div>
  Prazo de locação:
