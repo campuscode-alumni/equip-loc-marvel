@@ -12,7 +12,9 @@ feature 'User create customer' do
                             phone_number: '11995432255',
                             state_registration: '159632'
                             )
-    visit new_customer_path
+    visit root_path
+
+    click_on 'Cadastrar Cliente'
 
     fill_in 'Nome',                     with: customer.name
     fill_in 'Tipo de Cliente',          with: customer.customer_type
@@ -34,6 +36,8 @@ feature 'User create customer' do
     expect(page).to have_content(customer.phone_number)
     expect(page).to have_content(customer.state_registration)
     expect(page).not_to have_css('strong', text: 'Vip')
+
+    click_on 'Voltar'
 
   end
 
