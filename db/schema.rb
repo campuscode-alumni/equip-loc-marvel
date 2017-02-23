@@ -29,6 +29,20 @@ ActiveRecord::Schema.define(version: 20170223005926) do
     t.index ["equipment_id"], name: "index_contracts_on_equipment_id"
   end
 
+  create_table "customers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "customer_type"
+    t.string   "document"
+    t.string   "adress"
+    t.string   "email"
+    t.string   "contact_name"
+    t.string   "phone_number"
+    t.string   "state_registration"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.boolean  "vip"
+  end
+
   create_table "equipment", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
@@ -42,6 +56,21 @@ ActiveRecord::Schema.define(version: 20170223005926) do
     t.string   "vendor"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+  end
+
+  create_table "equipment_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "prices", force: :cascade do |t|
+    t.integer  "rental_period"
+    t.integer  "equipment_type_id"
+    t.decimal  "price"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["equipment_type_id"], name: "index_prices_on_equipment_type_id"
   end
 
   create_table "rented_equipments", force: :cascade do |t|

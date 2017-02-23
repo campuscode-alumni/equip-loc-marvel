@@ -1,0 +1,22 @@
+<dl>
+  <dt>Nome</dt>
+  <dd> <%= @customer.name %> </dd>
+  <dt>Tipo de Cliente</dt>
+  <dd><%= @customer.customer_type %> </dd>
+  <dt>CPF/CNPJ</dt>
+  <dd><%= @customer.document %> </dd>
+  <dt>Endereço de Faturamento</dt>
+  <dd><%= @customer.adress %> </dd>
+  <dt>Email</dt>
+  <dd><%= @customer.email %></dd>
+  <dt>Responsável</dt>
+  <dd><%= @customer.contact_name %></dd>
+  <dt>Telefone</dt>
+  <dd><%= @customer.phone_number %></dd>
+  <dt>Inscrição Estadual</dt>
+  <dd><%= @customer.state_registration %></dd>
+</dl>
+
+<% if @customer.vip == true %>
+  <strong>  Vip  </strong>
+<% end  %>
