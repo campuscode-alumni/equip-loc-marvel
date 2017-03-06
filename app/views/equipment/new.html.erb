@@ -30,8 +30,8 @@
     <%= f.text_field :picture %>
   </div>
   <div>
-    <%= f.label :equipment_type, 'Tipo do Equipamento' %>
-    <%= f.text_field :equipment_type %>
+    <%= f.label :equipment_type_id, 'Tipo do Equipamento' %>
+    <%= f.collection_select(:equipment_type_id, @equipment_types, :id, :name) %>
   </div>
   <div>
     <%= f.label :manufacture, 'Fabricante' %>
