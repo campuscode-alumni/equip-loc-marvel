@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-feature 'User create return_receipt' do
+feature 'User create return receipt' do
   scenario 'successfully' do
 
-    customer = Customer.new(name: 'João Almeida',
+    customer = Customer.create(name: 'João Almeida',
                             customer_type: 'Pessoa física',
                             document: '423.235.958-30',
                             adress: 'Av paulista 2000',
@@ -12,20 +12,21 @@ feature 'User create return_receipt' do
                             phone_number: '11995432255',
                             state_registration: '159632'
                             )
+    equipment_type = EquipmentType.create(name: 'Empilhadeira')
 
-    equip = Equipment.new(name: 'Furadeira',
-                          description: 'Furadeira Bonita',
+    equip = Equipment.create(name: 'Empilhadeira',
+                          description: 'Empilhadeira',
                           serial_number: '0001',
                           acquisition_value: '5000',
                           acquisition_date: '2017-02-21',
                           shelf_life: '5 anos',
                           picture: 'img/furadeira',
-                          equipment_type: 'alta precisão',
+                          equipment_type: equipment_type,
                           manufacture: 'bosch',
                           vendor: 'Zezinho')
 
     contract = Contract.create(
-      client: 'Odebrecht',
+      client: customer,
       rental_period: 3,
       amount: 30000,
       discount: 100,
@@ -35,16 +36,27 @@ feature 'User create return_receipt' do
       start_date: '20/02/2017'
     )
 
-    receipts = Return_receipt.new(name: 'Nome Funcionário',
-                                  cpf: 'CPF'
-                                 )
+    receipt = ReturnReceipt.new(name: 'Nome Funcionário',
+                                  cpf: '1234567895'
+                                  )
+    contract.equipment << equip
+    contract.save!
 
+    visit contract_path(contract)
     click_on 'Emitir Recibo de Devolução'
 
-    fill_in 'Nome',                with: receipts.name
-    fill_in 'Descrição',           with: receipts.cpf
+    fill_in 'Nome do Funcionário',               with: receipt.name
+    fill_in 'CPF do Funcionário',                with: receipt.cpf
 
-    expect(to).have_content receipts.name
-    expect(to).have_content receipts.cpf
+    click_on 'Imprimir Recibo de Devolução'
 
-    
+    expect(to).have_content receipt.name
+    expect(to).have_content receipt.cpf
+    expect(to).have_content equip.name
+    expect(to).have_content equip.serial_number
+    expect(to).have_content customer.name
+    expect(to).have_content customer.document
+    expect(to).have_content contract.rental_period
+
+    end
+  end

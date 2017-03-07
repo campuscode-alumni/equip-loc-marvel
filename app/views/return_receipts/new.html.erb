@@ -1,0 +1,12 @@
+<%= form_for @return_receipt do |f|%>
+  <div>
+    <%= f.label :name, 'Nome do Funcionário' %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :cpf, 'CPF do Funcionário'%>
+    <%= f.text_field :cpf %>
+  </div>
+
+  <%= f.submit 'Imprimir Recibo de Devolução' %>
+<% end %>
