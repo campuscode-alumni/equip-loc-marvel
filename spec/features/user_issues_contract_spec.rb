@@ -4,62 +4,18 @@ feature 'User issues contract' do
 
   scenario 'successfully' do
 
-    equipment_type = EquipmentType.create(name: '1000W')
+    type1 = create(:equipment_type, name: '1000W')
+    type2 = create(:equipment_type, name: '2000W')
 
-    equip1 = Equipment.create(
-      name: 'Furadeira',
-      description: 'Furadeira Bonita',
-      serial_number: '0001',
-      acquisition_value: '5000',
-      acquisition_date: '2017-02-21',
-      shelf_life: '5 anos',
-      picture: 'img/furadeira',
-      equipment_type: equipment_type,
-      manufacture: 'bosch',
-      vendor: 'Zezinho'
-    )
+    equips_type1 = create_list(:equipment, 5, equipment_type: type1)
+    equips_type2 = create_list(:equipment, 5, equipment_type: type2)
 
-    equip2 = Equipment.create(
-      name: 'Betoneira',
-      description: 'Betoneira Super Gigante',
-      serial_number: '8888',
-      acquisition_value: '10000',
-      acquisition_date: '1984-05-14',
-      shelf_life: '48 anos',
-      picture: 'img/betoneira',
-      equipment_type: equipment_type,
-      manufacture: 'DeWalt',
-      vendor: 'Tio Sam'
-    )
-
-    equip3 = Equipment.create(
-      name: 'Escavadeira',
-      description: 'Cava buraco até a China',
-      serial_number: '1234',
-      acquisition_value: '986.14',
-      acquisition_date: '2016-04-01',
-      shelf_life: '13 anos',
-      picture: 'img/escavadeira',
-      equipment_type: equipment_type,
-      manufacture: 'Caterpillar',
-      vendor: 'Mappin'
-    )
-
-    customer = Customer.create(
-      name: 'Odebrecht',
-      customer_type: 'Pessoa física',
-      document: '423.235.958-30',
-      adress: 'Av paulista 2000',
-      email: 'joaoalmeida@gmail.com',
-      contact_name: 'Jonas Souza',
-      phone_number: '11995432255',
-      state_registration: '159632'
-    )
+    customer = create(:customer)
 
     contract = Contract.create(
       rental_period: 3,
-      amount: 30000,
       discount: 100,
+      amount: 3000,
       delivery_address: 'Rua Capote Valente 200',
       contact: 'Mestre Juvenal',
       payment_method: 'Pools of Cash',
@@ -79,8 +35,8 @@ feature 'User issues contract' do
     fill_in 'Forma de pagamento', with: contract.payment_method
     fill_in 'Data de início', with: contract.start_date
 
-    check equip1.name
-    check equip2.name
+    check equips.first.name
+    check equips.second.name
 
     click_on 'Emitir Contrato'
 
@@ -95,15 +51,15 @@ feature 'User issues contract' do
     expect(page).to have_content(contract.start_date)
     expect(page).to have_content(Time.zone.today.to_s)
     expect(page).to have_content((contract.start_date + contract.rental_period.days).to_s)
-    expect(page).to have_content(equip1.name)
-    expect(page).to have_content(equip1.acquisition_value)
-    expect(page).to have_content(equip1.serial_number)
-    expect(page).to have_content(equip2.name)
-    expect(page).to have_content(equip2.acquisition_value)
-    expect(page).to have_content(equip2.serial_number)
-    expect(page).not_to have_content(equip3.name)
-    expect(page).not_to have_content(equip3.acquisition_value)
-    expect(page).not_to have_content(equip3.serial_number)
+    expect(page).to have_content(equips.first.name)
+    expect(page).to have_content(equips.first.acquisition_value)
+    expect(page).to have_content(equips.first.serial_number)
+    expect(page).to have_content(equips.second.name)
+    expect(page).to have_content(equips.second.acquisition_value)
+    expect(page).to have_content(equips.second.serial_number)
+    expect(page).not_to have_content(equips.last.name)
+    expect(page).not_to have_content(equips.last.acquisition_value)
+    expect(page).not_to have_content(equips.last.serial_number)
 
   end
 
