@@ -69,11 +69,12 @@ ActiveRecord::Schema.define(version: 20170307004257) do
     t.datetime "acquisition_date"
     t.integer  "shelf_life"
     t.string   "picture"
-    t.string   "equipment_type"
     t.string   "manufacture"
     t.string   "vendor"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "equipment_type_id"
+    t.index ["equipment_type_id"], name: "index_equipment_on_equipment_type_id"
   end
 
   create_table "equipment_types", force: :cascade do |t|

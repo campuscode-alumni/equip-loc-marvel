@@ -4,6 +4,7 @@ feature 'User register equipment' do
 
   scenario 'successfully' do
     #setup
+    equipment_type = EquipmentType.create(name: '1000W')
     equip = Equipment.new(name: 'Furadeira',
                           description: 'Furadeira Bonita',
                           serial_number: '0001',
@@ -11,7 +12,6 @@ feature 'User register equipment' do
                           acquisition_date: '2017-02-21',
                           shelf_life: '5 anos',
                           picture: 'img/furadeira',
-                          equipment_type: 'alta precisão',
                           manufacture: 'bosch',
                           vendor: 'Zezinho')
 
@@ -25,7 +25,7 @@ feature 'User register equipment' do
     fill_in 'Data de Aquisição',   with: equip.acquisition_date
     fill_in 'Vida Útil',           with: equip.shelf_life
     fill_in 'Foto',                with: equip.picture
-    fill_in 'Tipo do Equipamento', with: equip.equipment_type
+    select(equipment_type.name,    :from => 'Tipo do Equipamento')
     fill_in 'Fabricante',          with: equip.manufacture
     fill_in 'Fornecedor',          with: equip.vendor
 
@@ -39,7 +39,7 @@ feature 'User register equipment' do
     expect(page).to have_content equip.acquisition_date
     expect(page).to have_content equip.shelf_life
     expect(page).to have_content equip.picture
-    expect(page).to have_content equip.equipment_type
+    expect(page).to have_content equipment_type.name
     expect(page).to have_content equip.manufacture
     expect(page).to have_content equip.vendor
 
