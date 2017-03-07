@@ -53,3 +53,6 @@
   Data de fim:
   <%= @contract.end_date %>
 </div>
+<div>
+  <%= link_to 'Emitir Recibo de Entrega', contract_delivery_receipts_path(@contract), method: :post %>
+</div>

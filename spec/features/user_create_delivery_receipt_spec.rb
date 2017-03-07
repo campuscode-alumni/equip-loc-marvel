@@ -27,7 +27,7 @@ feature 'User create delivery receipt' do
                           vendor: 'Zezinho')
 
     contract = Contract.new(
-      client: 'Odebrecht',
+      customer: customer,
       rental_period: 3,
       amount: 30000,
       discount: 100,
@@ -41,6 +41,9 @@ feature 'User create delivery receipt' do
     contract.equipment << equip
     contract.save!
 
+    delivery_receipt = DeliveryReceipt.new(contract: contract,
+                                          issue_date: Time.zone.now)
+
     #execução
     visit contract_path(contract)
     click_on 'Emitir Recibo de Entrega'
@@ -48,9 +51,9 @@ feature 'User create delivery receipt' do
     expect(page).to have_content('Recibo de Entrega')
 
     expect(page).to have_content(contract.contact)
-    expect(page).to have_content(contract.client)
+    expect(page).to have_content(contract.customer)
     expect(page).to have_content(customer.document)
-    expect(page).to have_content(contract.equipments)
+    expect(page).to have_content(contract.equipment)
     expect(page).to have_content(contract.rental_period)
     expect(page).to have_content(contract.delivery_address)
     expect(page).to have_content(contract.created_at)

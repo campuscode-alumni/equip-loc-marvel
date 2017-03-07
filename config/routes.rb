@@ -3,9 +3,11 @@ Rails.application.routes.draw do
   root 'home#index'
   resources :budgets, only: [:new, :create]
   resources :prices, only: [:new, :create, :show]
-  resources :contracts, only: [:new, :create, :show]
+  resources :contracts, only: [:new, :create, :show] do
+    resources :delivery_receipts, only: [:create]
+  end
   resources :equipment, only: [:new, :create, :show]
   resources :customers, only: [:new, :create, :show]
-
+  resources :delivery_receipts, only: [:show]
 
 end
