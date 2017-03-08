@@ -1,0 +1,15 @@
+<h1> Recibo de Entrega </h1>
+
+Eu, <%= @delivery_receipt.contract.contact %>, em nome da empresa
+<%= @delivery_receipt.contract.customer.name %>, inscrita no CNPJ
+<%= @delivery_receipt.contract.customer.document %> declaro ter recebido
+os equipamentos:
+<%= @delivery_receipt.contract.equipment.each do |equip| %>
+  <%= equip.name %>
+  <%= equip.serial_number %>
+<% end %>
+ (lista dos
+equipamentos contendo numero de serie e nome) pelo período de …….. em perfeitas
+condições de uso no endereço ………………………………. (endereço de entrega) no dia
+……………………….. (data da emissão) de acordo com o contrato ………. (numero do
+contrato).

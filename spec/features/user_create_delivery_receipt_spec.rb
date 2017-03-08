@@ -26,6 +26,17 @@ feature 'User create delivery receipt' do
                           manufacture: 'bosch',
                           vendor: 'Zezinho')
 
+    another_equip = Equipment.create(name: 'Betoneira',
+                              description: 'Betoneiraa Bonita',
+                              serial_number: '0002',
+                              acquisition_value: '10000',
+                              acquisition_date: '2017-02-21',
+                              shelf_life: '5 anos',
+                              picture: 'img/betoneira',
+                              equipment_type: equipment_type,
+                              manufacture: 'bosch',
+                              vendor: 'Zezinho')
+
     contract = Contract.new(
       customer: customer,
       rental_period: 3,
@@ -38,7 +49,7 @@ feature 'User create delivery receipt' do
 
 
 
-    contract.equipment << equip
+    contract.equipment << [equip, another_equip]
     contract.save!
 
     delivery_receipt = DeliveryReceipt.new(contract: contract,
@@ -51,9 +62,10 @@ feature 'User create delivery receipt' do
     expect(page).to have_content('Recibo de Entrega')
 
     expect(page).to have_content(contract.contact)
-    expect(page).to have_content(contract.customer)
+    expect(page).to have_content(contract.customer.name)
     expect(page).to have_content(customer.document)
-    expect(page).to have_content(contract.equipment)
+    expect(page).to have_content(contract.equipment.name)
+    expect(page).to have_content(contract.equipment.serial_number)
     expect(page).to have_content(contract.rental_period)
     expect(page).to have_content(contract.delivery_address)
     expect(page).to have_content(contract.created_at)
