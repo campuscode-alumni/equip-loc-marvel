@@ -11,7 +11,7 @@ FactoryGirl.define do
   end
 
   factory :equipment do
-    sequence(:name) { |n| Faker::Lorem.word }
+    sequence(:name) { |n| Faker::Name.first_name }
     description 'Furadeira Bonita'
     sequence(:serial_number) { |n| Faker::Number.number(6) }
     sequence(:acquisition_value) { |n| Faker::Number.decimal(2) }
@@ -20,6 +20,15 @@ FactoryGirl.define do
     picture 'img/furadeira'
     manufacture 'bosch'
     vendor 'Zezinho'
+  end
+
+  factory :contract do
+    rental_period 3
+    discount Faker::Number.normal(5, 2.2)
+    delivery_address 'Rua Capote Valente 200'
+    contact 'Mestre Juvenal'
+    payment_method 'Pools of Cash'
+    start_date '20/02/2017'
   end
 
 end
