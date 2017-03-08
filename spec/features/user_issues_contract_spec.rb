@@ -4,6 +4,8 @@ feature 'User issues contract' do
 
   scenario 'successfully' do
 
+    equipment_type = EquipmentType.create(name: 'Empilhadeira')
+
     equip1 = Equipment.create(name: 'Furadeira',
                           description: 'Furadeira Bonita',
                           serial_number: '0001',
@@ -11,7 +13,7 @@ feature 'User issues contract' do
                           acquisition_date: '2017-02-21',
                           shelf_life: '5 anos',
                           picture: 'img/furadeira',
-                          equipment_type: 'alta precisão',
+                          equipment_type: equipment_type,
                           manufacture: 'bosch',
                           vendor: 'Zezinho')
 
@@ -22,7 +24,7 @@ feature 'User issues contract' do
                           acquisition_date: '1984-05-14',
                           shelf_life: '48 anos',
                           picture: 'img/betoneira',
-                          equipment_type: 'Altérrima Performance',
+                          equipment_type: equipment_type,
                           manufacture: 'DeWalt',
                           vendor: 'Tio Sam')
 
@@ -33,12 +35,12 @@ feature 'User issues contract' do
                           acquisition_date: '2016-04-01',
                           shelf_life: '13 anos',
                           picture: 'img/escavadeira',
-                          equipment_type: 'Mágico',
+                          equipment_type: equipment_type,
                           manufacture: 'Caterpillar',
                           vendor: 'Mappin')
 
     contract = Contract.create(
-      client: 'Odebrecht',
+      custumer: 'Odebrecht',
       rental_period: 3,
       amount: 30000,
       discount: 100,

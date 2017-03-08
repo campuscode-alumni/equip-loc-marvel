@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307001716) do
+ActiveRecord::Schema.define(version: 20170308005413) do
 
   create_table "budgets", force: :cascade do |t|
     t.string   "name"
@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 20170307001716) do
   end
 
   create_table "contracts", force: :cascade do |t|
-    t.string   "client"
     t.integer  "rental_period"
     t.float    "amount"
     t.float    "discount"
@@ -35,6 +34,8 @@ ActiveRecord::Schema.define(version: 20170307001716) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "equipment_id"
+    t.integer  "customer_id"
+    t.index ["customer_id"], name: "index_contracts_on_customer_id"
     t.index ["equipment_id"], name: "index_contracts_on_equipment_id"
   end
 
@@ -60,11 +61,12 @@ ActiveRecord::Schema.define(version: 20170307001716) do
     t.datetime "acquisition_date"
     t.integer  "shelf_life"
     t.string   "picture"
-    t.string   "equipment_type"
     t.string   "manufacture"
     t.string   "vendor"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "equipment_type_id"
+    t.index ["equipment_type_id"], name: "index_equipment_on_equipment_type_id"
   end
 
   create_table "equipment_types", force: :cascade do |t|
@@ -94,8 +96,10 @@ ActiveRecord::Schema.define(version: 20170307001716) do
   create_table "return_receipts", force: :cascade do |t|
     t.string   "name"
     t.string   "cpf"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "contract_id"
+    t.index ["contract_id"], name: "index_return_receipts_on_contract_id"
   end
 
 end

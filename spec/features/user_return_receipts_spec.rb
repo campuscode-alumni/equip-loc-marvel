@@ -50,13 +50,13 @@ feature 'User create return receipt' do
 
     click_on 'Imprimir Recibo de Devolução'
 
-    expect(to).have_content receipt.name
-    expect(to).have_content receipt.cpf
-    expect(to).have_content equip.name
-    expect(to).have_content equip.serial_number
-    expect(to).have_content customer.name
-    expect(to).have_content customer.document
-    expect(to).have_content contract.rental_period
+    expect(page).to have_content receipt.name
+    expect(page).to have_content receipt.cpf
+    expect(page).to have_content equip.name
+    expect(page).to have_content equip.serial_number
+    expect(page).to have_content customer.name
+    expect(page).to have_content customer.document
+    expect(page).to have_content contract.rental_period
 
     end
   end
