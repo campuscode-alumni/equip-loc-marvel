@@ -14,6 +14,8 @@ feature 'User create return receipt' do
                             )
     equipment_type = EquipmentType.create(name: 'Empilhadeira')
 
+    price = Price.create(equipment_type: equipment_type, rental_period: 10, price: 10)
+
     equip = Equipment.create(name: 'Empilhadeira',
                           description: 'Empilhadeira',
                           serial_number: '0001',
@@ -26,10 +28,10 @@ feature 'User create return receipt' do
                           vendor: 'Zezinho')
 
     contract = Contract.create(
-      client: customer,
+      customer: customer,
       rental_period: 3,
       amount: 30000,
-      discount: 100,
+      discount: 0,
       delivery_address: 'Rua Capote VaClassNamelente 200',
       contact: 'Mestre Juvenal',
       payment_method: 'Pools of Cash',
