@@ -1,4 +1,20 @@
-<%= link_to 'Novo Contrato', new_contract_path %> <br>
-<%= link_to 'Solicitar Orçamento', new_budget_path %>
-<h3><%= flash[:alert] %></h3>
-<%= link_to 'Cadastrar Cliente', new_customer_path %>
+<div class="container theme-showcase" role="main">
+
+  <div class="jumbotron">
+    <%= image_tag("marvelcabecalho.jpg", width: '100%') %>
+  </div>
+
+  <div>
+    <h3><%= flash[:alert] %></h3>
+  </div>
+
+  <div align="center">
+    <%= link_to 'Solicitar Orçamento', new_budget_path, class: "btn btn-lg btn-primary" %>
+    <%= link_to 'Cadastrar Cliente', new_customer_path, class: "btn btn-lg btn-primary" %>
+    <%= link_to 'Novo Contrato', new_contract_path, class: "btn btn-lg btn-primary" %>
+    <%= link_to 'Cadastrar Equipamento', new_equipment_path, class: "btn btn-lg btn-primary" %>
+    <%= link_to 'Cadastrar Tipo de Equipamento', new_equipment_type_path, class: "btn btn-lg btn-primary" %>
+    <%= link_to 'Cadastrar Preço', new_price_path, class: "btn btn-lg btn-primary" %>
+  </div>
+
+</div>

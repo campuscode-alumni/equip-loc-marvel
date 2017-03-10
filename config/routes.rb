@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :delivery_receipts, only: [:create]
   end
   resources :equipment, only: [:new, :create, :show]
+  resources :equipment_types, only: [:new, :create, :show]
   resources :customers, only: [:new, :create, :show]
   resources :delivery_receipts, only: [:show]
 
