@@ -15,6 +15,10 @@ feature 'User create delivery receipt' do
 
     equipment_type = EquipmentType.create(name: 'Furadeira')
 
+    price = Price.create(rental_period: 3,
+                          equipment_type: equipment_type,
+                          price: '50')
+
     equip = Equipment.create(name: 'Furadeira',
                           description: 'Furadeira Bonita',
                           serial_number: '0001',
@@ -59,17 +63,23 @@ feature 'User create delivery receipt' do
     visit contract_path(contract)
     click_on 'Emitir Recibo de Entrega'
     #expectativa
+    expect(page).to have_content("São Paulo #{Time.zone.today.to_s}")
     expect(page).to have_content('Recibo de Entrega')
 
     expect(page).to have_content(contract.contact)
     expect(page).to have_content(contract.customer.name)
     expect(page).to have_content(customer.document)
-    expect(page).to have_content(contract.equipment.name)
-    expect(page).to have_content(contract.equipment.serial_number)
+
+    contract.equipment.each do |equipment|
+      expect(page).to have_content(equipment.name)
+      expect(page).to have_content(equipment.serial_number)
+    end
+
     expect(page).to have_content(contract.rental_period)
     expect(page).to have_content(contract.delivery_address)
     expect(page).to have_content(contract.created_at)
-    expect(page).to have_content(contract.id)
+
+    expect(page).to have_content("contrato #{contract.id}")
 
   end
 end
