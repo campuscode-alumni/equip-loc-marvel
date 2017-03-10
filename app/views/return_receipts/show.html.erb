@@ -1,3 +1,16 @@
-<%= @return_receipt.name %>
-<%= @return_receipt.cpf %>
-<%= @return_receipt.equipment.name %>
+<h1>Recibo de Devolução</h1>
+
+
+<p>Eu, <%= @return_receipt.name %>, declaro ter recebido os equipamentos
+<% @return_receipt.contract.equipment.each do |equipment| %>
+  <%= equipment.name %>
+  <%= equipment.serial_number %>
+<%end%>
+ em devolução referente ao contrato <%= @return_receipt.contract.id %> em perfeitas
+condições da empresa <%= @return_receipt.contract.customer.name %>
+, inscrita no CNPJ <%= @return_receipt.contract.customer.document %>
+ no dia ……………………….. (data da devolução).</p>
+
+
+_____________________________
+Assinatura do Funcionário
