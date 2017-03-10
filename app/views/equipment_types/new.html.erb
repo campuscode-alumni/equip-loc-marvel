@@ -1,0 +1,12 @@
+<h2>Novo Tipo de Equipamento</h2>
+
+<%= flash[:errors] %>
+
+<%= simple_form_for @equipment_type do |f| %>
+  <div>
+    <%= f.input :name, label: 'Nome' %>
+  </div>
+  <div>
+    <%= f.submit 'Cadastrar' %>
+  </div>
+<% end %>
