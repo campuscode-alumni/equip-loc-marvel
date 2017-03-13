@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   resources :equipment, only: [ :new, :create, :show ]
   resources :customers, only: [ :new, :create, :show ]
   resources :return_receipts, only: [ :show]
+  resources :equipment_types, only: [:new, :create, :show]
 
 end
