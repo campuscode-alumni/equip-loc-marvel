@@ -63,7 +63,7 @@ feature 'User create delivery receipt' do
     visit contract_path(contract)
     click_on 'Emitir Recibo de Entrega'
     #expectativa
-    expect(page).to have_content("São Paulo #{Time.zone.today.to_s}")
+    expect(page).to have_content("São Paulo, #{Time.zone.today.to_s}")
     expect(page).to have_content('Recibo de Entrega')
 
     expect(page).to have_content(contract.contact)
@@ -78,7 +78,6 @@ feature 'User create delivery receipt' do
     expect(page).to have_content(contract.rental_period)
     expect(page).to have_content(contract.delivery_address)
     expect(page).to have_content(contract.created_at)
-
     expect(page).to have_content("contrato #{contract.id}")
 
   end
