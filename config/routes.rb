@@ -5,10 +5,11 @@ Rails.application.routes.draw do
   resources :prices, only: [:new, :create, :show]
   resources :contracts, only: [:new, :create, :show] do
     resources :delivery_receipts, only: [:create]
+    resources :return_receipts, only: [ :new, :create ]
   end
   resources :equipment, only: [:new, :create, :show]
   resources :equipment_types, only: [:new, :create, :show]
   resources :customers, only: [:new, :create, :show]
   resources :delivery_receipts, only: [:show]
-
+  resources :return_receipts, only: [ :show]
 end
