@@ -1,5 +1,8 @@
 class ContractsController < ApplicationController
 
+  def index
+  end
+
   def new
     @contract = Contract.new
     @customers = Customer.all

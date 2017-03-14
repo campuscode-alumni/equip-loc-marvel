@@ -9,6 +9,9 @@ feature 'User issues contract' do
     type2 = create(:equipment_type, name: '2000W')
     type3 = create(:equipment_type, name: '3000W')
 
+    price1 = create(:price, equipment_type: type1, rental_period: '1')
+    price2 = create(:price, equipment_type: type2, rental_period: '1')
+    price3 = create(:price, equipment_type: type3, rental_period: '1')
 
     equips_type1 = create_list(:equipment, 1, equipment_type: type1)
     equips_type2 = create_list(:equipment, 2, equipment_type: type2)
@@ -20,6 +23,7 @@ feature 'User issues contract' do
 
     visit root_path
 
+    click_on 'Contratos'
     click_on 'Novo Contrato'
 
     select(customer.name, :from => 'Cliente')
@@ -79,8 +83,7 @@ feature 'User issues contract' do
 
   scenario 'with no data' do
 
-    visit root_path
-    click_on 'Novo Contrato'
+    visit new_contract_path
     click_on 'Emitir Contrato'
 
     expect(page).to have_content('Informação obrigatória.')
