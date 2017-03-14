@@ -56,7 +56,11 @@
   <%= @contract.end_date %>
 </div>
 <div>
-  <%= link_to 'Emitir Recibo de Entrega', contract_delivery_receipts_path(@contract), method: :post %>
+  <% if @contract.delivery_receipt %>
+    <%= link_to 'Exibir Recibo de Entrega', contract_delivery_receipts_path(@contract), method: :post %>
+  <% else %>
+    <%= link_to 'Emitir Recibo de Entrega', contract_delivery_receipts_path(@contract), method: :post %>
+  <% end %>
 </div>
 <br>
 <%= link_to 'Emitir Recibo de Devolução', new_contract_return_receipt_path(@contract) %>
