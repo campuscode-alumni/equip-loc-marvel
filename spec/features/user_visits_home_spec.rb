@@ -33,8 +33,6 @@ feature 'User visits home' do
 
     visit root_path
 
-    save_and_open_page
-
     expect(page).to have_content(contract1.id)
     expect(page).to have_content(contract1.customer.name)
     expect(page).to have_content(contract1.total_amount)
