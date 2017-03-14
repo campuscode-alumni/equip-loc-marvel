@@ -2,7 +2,8 @@ class Contract < ApplicationRecord
   has_many :rented_equipments
   has_many :equipment, through: :rented_equipments
   belongs_to :customer
-  
+  has_one :delivery_receipt
+
 
   validates :equipment_ids, :rental_period, :amount, :delivery_address,
   :contact, :payment_method, :start_date, presence: {message: 'Informação obrigatória.'}

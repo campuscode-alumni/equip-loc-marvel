@@ -53,6 +53,14 @@ ActiveRecord::Schema.define(version: 20170308005413) do
     t.boolean  "vip"
   end
 
+  create_table "delivery_receipts", force: :cascade do |t|
+    t.integer  "contract_id"
+    t.datetime "issue_date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["contract_id"], name: "index_delivery_receipts_on_contract_id"
+  end
+
   create_table "equipment", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
