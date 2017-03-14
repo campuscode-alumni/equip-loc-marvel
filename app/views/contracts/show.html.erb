@@ -55,5 +55,11 @@
   Data de fim:
   <%= @contract.end_date %>
 </div>
+<div>
+  Finalizado: <%= @contract.finished %>
+</div>
 <br>
+<div>
 <%= link_to 'Emitir Recibo de Devolução', new_contract_return_receipt_path(@contract) %>
+<%= link_to 'Finalizar Contrato', finish_contract_path(@contract), method: :put %>
+</div>

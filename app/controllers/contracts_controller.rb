@@ -21,6 +21,13 @@ class ContractsController < ApplicationController
     @contract = Contract.find(params[:id])
   end
 
+  def finish
+    @contract = Contract.find(params[:id])
+    @contract.finished = Time.zone.today.to_s
+    @contract.save
+    redirect_to @contract
+  end
+
   private
 
   def contract_params

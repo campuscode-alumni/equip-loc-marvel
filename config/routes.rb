@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :budgets, only: [ :new, :create ]
   resources :prices, only: [ :new, :create, :show ]
   resources :contracts, only: [ :new, :create, :show ] do
+    member do
+      put 'finish'
+    end
     resources :return_receipts, only: [ :new, :create ]
   end
   resources :equipment, only: [ :new, :create, :show ]
