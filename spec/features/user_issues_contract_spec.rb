@@ -4,6 +4,7 @@ feature 'User issues contract' do
 
   scenario 'successfully' do
 
+
     type1 = create(:equipment_type, name: '1000W')
     type2 = create(:equipment_type, name: '2000W')
     type3 = create(:equipment_type, name: '3000W')

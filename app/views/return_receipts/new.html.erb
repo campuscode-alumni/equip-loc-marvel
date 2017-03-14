@@ -1,0 +1,14 @@
+<h2><%= flash[:error] %></h2>
+<dl>
+<%= form_for([@contract, @return_receipt]) do |f|%>
+  <div>
+    <dt><%= f.label :name, 'Nome do Funcionário' %></dt>
+    <dd><%= f.text_field :name %></dd>
+  </div>
+  <div>
+    <dt><%= f.label :cpf, 'CPF do Funcionário'%></dt>
+    <dd><%= f.text_field :cpf %></dd>
+  </div>
+</dl>
+  <%= f.submit 'Imprimir Recibo de Devolução' %>
+<% end %>
