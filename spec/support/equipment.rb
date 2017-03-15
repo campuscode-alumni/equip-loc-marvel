@@ -21,6 +21,7 @@ FactoryGirl.define do
     picture 'img/furadeira'
     manufacture 'bosch'
     vendor 'Zezinho'
+    equipment_type
   end
 
 end
