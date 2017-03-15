@@ -90,4 +90,23 @@ feature 'User issues contract' do
 
   end
 
+  scenario 'back to index' do
+
+    visit root_path
+    click_on 'Contratos'
+    click_on 'Voltar'
+
+    expect(current_path).to eq root_path
+
+  end
+
+  scenario 'back to contract' do
+
+    visit contracts_path
+    click_on 'Novo Contrato'
+    click_on 'Voltar'
+
+    expect(current_path).to eq contracts_path
+  end
+
 end
