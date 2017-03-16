@@ -12,6 +12,7 @@ feature 'user create budget'  do
 
     visit root_path
 
+    click_on 'Orçamentos'
     click_on 'Solicitar Orçamento'
 
     fill_in 'Nome', with: budget.name
@@ -34,10 +35,31 @@ feature 'user create budget'  do
 
     visit root_path
 
+    click_on 'Orçamentos'
     click_on 'Solicitar Orçamento'
-
     click_on 'Enviar Orçamento'
 
     expect(page).to have_content('Preencha os campos em brancos')
   end
+
+  scenario 'back to index' do
+
+    visit root_path
+
+    click_on 'Orçamentos'
+    click_on 'Voltar'
+
+    expect(current_path).to eq root_path
+  end
+
+  scenario 'back to budget' do
+
+    visit budgets_path
+
+    click_on 'Solicitar Orçamento'
+    click_on 'Voltar'
+
+    expect(current_path).to eq budgets_path
+  end
+
 end

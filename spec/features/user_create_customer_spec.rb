@@ -64,6 +64,25 @@ feature 'User create customer' do
 
 
   end
+
+  scenario 'back to customer' do
+    visit customers_path
+
+    click_on 'Novo Cliente'
+    click_on 'Voltar'
+
+    expect(current_path).to eq customers_path
+  end
+
+  scenario 'back to index' do
+    visit root_path
+    
+    click_on 'Clientes'
+    click_on 'Voltar'
+
+    expect(current_path).to eq root_path
+  end
+
   scenario 'valid empty field' do
 
     visit new_customer_path
