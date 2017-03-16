@@ -1,16 +1,5 @@
 FactoryGirl.define do
 
-  # Estes tipos estao juntos, porque sao relacionados
-
-  factory :equipment_type do
-    sequence(:name) { |n| "#{n}000W" }
-  end
-
-  factory :price do
-    sequence(:price) { |n| Faker::Number.decimal(2) }
-    # sequence(:price) { |n| Faker::Number.decimal(2) }
-  end
-
   factory :equipment do
     sequence(:name) { |n| Faker::Name.first_name }
     description 'Furadeira Bonita'
@@ -21,7 +10,9 @@ FactoryGirl.define do
     picture 'img/furadeira'
     manufacture 'bosch'
     vendor 'Zezinho'
-    equipment_type
+    trait :with_equipment_type_and_price do
+      equipment_type { create(:equipment_type, :with_price)}
+    end
   end
 
 end
