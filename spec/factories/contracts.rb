@@ -7,6 +7,7 @@ FactoryGirl.define do
     contact 'Mestre Juvenal'
     payment_method 'Pools of Cash'
     start_date '20/02/2017'
+    customer
   end
 
 end

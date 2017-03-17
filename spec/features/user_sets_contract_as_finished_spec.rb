@@ -8,7 +8,7 @@ feature 'User sets contract as finished' do
     price1 = create(:price, equipment_type: type1, rental_period: '1')
     equip1 = create(:equipment, equipment_type: type1)
     customer = create(:customer)
-    contract = create(:contract, equipment: [equip1], customer: customer)
+    contract = create(:contract, equipment: [equip1], customer: customer, discount: 0)
 
     # Index do contrato nao esta pronta, vai direto ao contrato
     visit contract_path(contract.id)

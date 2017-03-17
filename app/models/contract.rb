@@ -16,7 +16,7 @@ class Contract < ApplicationRecord
   def evaluate_amount
     self.amount = 0
     self.equipment.each do |equip|
-      self.amount += equip.equipment_type.price.price
+      self.amount += equip.equipment_type.current_price(self.rental_period)
     end
     self.amount = self.amount.round(2)
   end

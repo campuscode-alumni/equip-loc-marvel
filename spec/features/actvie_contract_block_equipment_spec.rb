@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 
-feature  'Actvie contrat block equipment' do
+feature  'Active contract block equipment' do
   scenario 'successfully ' do
 
     type1 = create(:equipment_type)
@@ -9,7 +9,7 @@ feature  'Actvie contrat block equipment' do
     equip1 = create(:equipment, equipment_type: type1, name: 'Furadeira 1000W')
     equip2 = create(:equipment, equipment_type: type1, name: 'Britadeira 2000W')
     customer = create(:customer)
-    contract = create(:contract, equipment: [equip1], customer: customer)
+    contract = create(:contract, equipment: [equip1], customer: customer, discount: 0)
 
     visit new_contract_path
 

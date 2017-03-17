@@ -10,9 +10,7 @@ FactoryGirl.define do
     picture 'img/furadeira'
     manufacture 'bosch'
     vendor 'Zezinho'
-    trait :with_equipment_type_and_price do
-      equipment_type { create(:equipment_type, :with_price)}
-    end
+    equipment_type
   end
 
 end

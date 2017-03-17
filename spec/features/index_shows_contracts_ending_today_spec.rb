@@ -7,13 +7,20 @@ feature 'User visits home' do
     customer1 = create(:customer, name: 'Pedro')
     customer2 = create(:customer, name: 'Mariana')
 
-    equipment_contract1 = create_list(:equipment, 3, :with_equipment_type_and_price)
-    equipment_contract2 = create_list(:equipment, 2, :with_equipment_type_and_price)
+    equipment_type = create(:equipment_type)
+    price = create(:price, equipment_type: equipment_type, price: 10, rental_period: 3)
 
-    contract1 = create(:contract, customer: customer1, delivery_address: 'endereco1', equipment: equipment_contract1, start_date: '2017-01-01', rental_period: 3)
-    contract2 = create(:contract, customer: customer2, delivery_address: 'endereco2', equipment: equipment_contract2, start_date: '2017-01-01', rental_period: 3)
+    equipment_contract1 = create_list(:equipment, 3, equipment_type: equipment_type)
+    equipment_contract2 = create_list(:equipment, 2, equipment_type: equipment_type)
 
-    puts contract1.end_date
+    contract1 = create(:contract, customer: customer1,
+                        delivery_address: 'endereco1', equipment: equipment_contract1,
+                        start_date: '2017-01-01', rental_period: 3, discount: 0)
+
+    contract2 = create(:contract, customer: customer2,
+                        delivery_address: 'endereco2', equipment: equipment_contract2,
+                        start_date: '2017-01-01', rental_period: 3, discount: 0)
+
 
     Timecop.travel('2017-01-04')
 
