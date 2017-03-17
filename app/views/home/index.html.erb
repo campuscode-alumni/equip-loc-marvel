@@ -16,5 +16,14 @@
   <% end %>
 
   <%= flash[:empty] %>
+</div>
 
+<div>
+    <% @contracts_end_today.each do |contract_end| %>
+      <%= contract_end.id %>
+      <%= contract_end.customer.name %>
+      <%= contract_end.delivery_address %>
+      <%= contract_end.equipment.count %> equipamentos
+    <% end %>
+    <%= flash[:empty_today] %>
 </div>
