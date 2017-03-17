@@ -56,11 +56,14 @@
   <%= @contract.end_date %>
 </div>
 <div>
+  Finalizado: <%= @contract.finished %>
+</div>
+<div>
   <% if @contract.delivery_receipt %>
-    <%= link_to 'Exibir Recibo de Entrega', contract_delivery_receipts_path(@contract), method: :post %>
+    <%= link_to 'Exibir Recibo de Entrega', delivery_receipt_path(@contract.delivery_receipt) %>
   <% else %>
     <%= link_to 'Emitir Recibo de Entrega', contract_delivery_receipts_path(@contract), method: :post %>
   <% end %>
+  <%= link_to 'Emitir Recibo de Devolução', new_contract_return_receipt_path(@contract) %>
+  <%= link_to 'Finalizar Contrato', finish_contract_path(@contract), method: :put %>
 </div>
-<br>
-<%= link_to 'Emitir Recibo de Devolução', new_contract_return_receipt_path(@contract) %>

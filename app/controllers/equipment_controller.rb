@@ -1,5 +1,8 @@
 class EquipmentController < ApplicationController
 
+  def index
+  end
+
   def new
     @equipment = Equipment.new
     @equipment_types = EquipmentType.all

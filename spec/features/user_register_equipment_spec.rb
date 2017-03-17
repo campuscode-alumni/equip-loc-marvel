@@ -54,4 +54,14 @@ feature 'User register equipment' do
     expect(page).to have_content 'Não foi possível cadastrar o equipamento'
   end
 
+  scenario 'back to index' do
+    #execução
+    visit root_path
+
+    click_on 'Equipamentos'
+    click_on 'Voltar'
+    #expectativa
+    expect(current_path).to eq root_path
+  end
+
 end

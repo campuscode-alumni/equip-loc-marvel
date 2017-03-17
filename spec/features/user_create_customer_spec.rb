@@ -3,18 +3,12 @@ require 'rails_helper'
 feature 'User create customer' do
   scenario 'successfully' do
 
-    customer = Customer.new(name: 'João Almeida',
-                            customer_type: 'Pessoa física',
-                            document: '423.235.958-30',
-                            adress: 'Av paulista 2000',
-                            email: 'joaoalmeida@gmail.com',
-                            contact_name: 'Jonas Souza',
-                            phone_number: '11995432255',
-                            state_registration: '159632'
-                            )
+    customer = build(:customer)
+
     visit root_path
 
-    click_on 'Cadastrar Cliente'
+    click_on 'Clientes'
+    click_on 'Novo Cliente'
 
     fill_in 'Nome',                     with: customer.name
     fill_in 'Tipo de Cliente',          with: customer.customer_type
@@ -42,15 +36,7 @@ feature 'User create customer' do
   end
 
   scenario 'vip' do
-    customer = Customer.new(name: 'João Almeida',
-                            customer_type: 'Pessoa física',
-                            document: '423.235.958-30',
-                            adress: 'Av paulista 2000',
-                            email: 'joaoalmeida@gmail.com',
-                            contact_name: 'Jonas Souza',
-                            phone_number: '11995432255',
-                            state_registration: '159632'
-                            )
+    customer = build(:customer)
 
     visit new_customer_path
 
@@ -78,6 +64,25 @@ feature 'User create customer' do
 
 
   end
+
+  scenario 'back to customer' do
+    visit customers_path
+
+    click_on 'Novo Cliente'
+    click_on 'Voltar'
+
+    expect(current_path).to eq customers_path
+  end
+
+  scenario 'back to index' do
+    visit root_path
+    
+    click_on 'Clientes'
+    click_on 'Voltar'
+
+    expect(current_path).to eq root_path
+  end
+
   scenario 'valid empty field' do
 
     visit new_customer_path

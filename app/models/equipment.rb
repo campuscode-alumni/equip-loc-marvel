@@ -5,4 +5,13 @@ class Equipment < ApplicationRecord
 
   validates :name, :description, :serial_number, :acquisition_value,
   :acquisition_date, :shelf_life, :picture, :manufacture, :vendor, presence: true
+
+  def available?
+    self.contracts.where(finished: nil).empty?
+  end
+
+  def self.available
+    all.select { |equipment| equipment.available? }
+  end
+
 end
