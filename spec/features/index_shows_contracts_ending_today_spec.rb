@@ -19,15 +19,17 @@ feature 'User visits home' do
 
     visit root_path
 
-    expect(page).to have_content(contract1.id)
-    expect(page).to have_content(contract1.customer.name)
-    expect(page).to have_content(contract1.delivery_address)
-    expect(page).to have_content('3 equipamentos')
+    within('div#contracts-ending-today') do
+      expect(page).to have_content(contract1.id)
+      expect(page).to have_content(contract1.customer.name)
+      expect(page).to have_content(contract1.delivery_address)
+      expect(page).to have_content('3 equipamentos')
 
-    expect(page).to have_content(contract2.id)
-    expect(page).to have_content(contract2.customer.name)
-    expect(page).to have_content(contract2.delivery_address)
-    expect(page).to have_content('2 equipamentos')
+      expect(page).to have_content(contract2.id)
+      expect(page).to have_content(contract2.customer.name)
+      expect(page).to have_content(contract2.delivery_address)
+      expect(page).to have_content('2 equipamentos')
+    end
   end
 
   scenario 'and there are no contracts ending today' do

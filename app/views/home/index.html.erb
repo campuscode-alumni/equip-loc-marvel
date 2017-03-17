@@ -5,20 +5,20 @@
   <h3><%= flash[:alert] %></h3>
 </div>
 
-<div>
-  <%= link_to 'Solicitar Orçamento', new_budget_path, class: "btn btn-lg btn-primary" %>
+<%= link_to 'Solicitar Orçamento', new_budget_path, class: "btn btn-lg btn-primary" %>
+
+<div id= 'all-contracts'>
   <% @contracts.each do |contract| %>
     <%= contract.id %>
     <%= contract.customer.name %>
-    <%= contract.total_amount %>
-    <%= contract.start_date %>
-    <%= contract.end_date %>
+    <%= number_to_currency contract.total_amount %>
+    <%= l(contract.start_date) %>
+    <%= l(contract.end_date) %>
   <% end %>
-
   <%= flash[:empty] %>
 </div>
 
-<div>
+<div id='contracts-ending-today'>
     <% @contracts_end_today.each do |contract_end| %>
       <%= contract_end.id %>
       <%= contract_end.customer.name %>

@@ -4,16 +4,16 @@ feature 'User visits home' do
 
   scenario 'and finds it pimped up' do
 
-    contract1 = build(:contract)
-    contract2 = build(:contract)
+    contract1 = build(:contract, start_date: '2017-01-01', rental_period: 2, discount: 0)
+    contract2 = build(:contract, start_date: '2017-02-10', rental_period: 3, discount: 0)
 
     customer = create(:customer)
 
     equipment_type1 = create(:equipment_type)
     equipment_type2 = create(:equipment_type)
 
-    price1 = create(:price, equipment_type: equipment_type1, rental_period: contract1.rental_period)
-    price2 = create(:price, equipment_type: equipment_type2, rental_period: contract2.rental_period)
+    price1 = create(:price, price: 3, equipment_type: equipment_type1, rental_period: contract1.rental_period)
+    price2 = create(:price, price: 14, equipment_type: equipment_type2, rental_period: contract2.rental_period)
 
     equipment1_contract1 = create(:equipment, equipment_type: equipment_type1)
     equipment2_contract1 = create(:equipment, equipment_type: equipment_type1)
@@ -33,17 +33,19 @@ feature 'User visits home' do
 
     visit root_path
 
-    expect(page).to have_content(contract1.id)
-    expect(page).to have_content(contract1.customer.name)
-    expect(page).to have_content(contract1.total_amount)
-    expect(page).to have_content(contract1.start_date)
-    expect(page).to have_content(contract1.end_date)
+    within('div#all-contracts') do
+      expect(page).to have_content(contract1.id)
+      expect(page).to have_content(contract1.customer.name)
+      expect(page).to have_content("R$ 20,00")
+      expect(page).to have_content("01/01/2017")
+      expect(page).to have_content("03/01/2017")
 
-    expect(page).to have_content(contract2.id)
-    expect(page).to have_content(contract2.customer.name)
-    expect(page).to have_content(contract2.total_amount)
-    expect(page).to have_content(contract2.start_date)
-    expect(page).to have_content(contract2.end_date)
+      expect(page).to have_content(contract2.id)
+      expect(page).to have_content(contract2.customer.name)
+      expect(page).to have_content("R$ 28,00")
+      expect(page).to have_content("10/02/2017")
+      expect(page).to have_content("13/02/2017")
+    end
   end
 
   scenario 'no contracts available' do
