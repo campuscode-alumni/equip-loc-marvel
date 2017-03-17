@@ -5,16 +5,35 @@
   <h3><%= flash[:alert] %></h3>
 </div>
 
-<div>
-  <%= link_to 'Solicitar Orçamento', new_budget_path, class: "btn btn-lg btn-primary" %>
-  <% @contracts.each do |contract| %>
-    <%= contract.id %>
-    <%= contract.customer.name %>
-    <%= contract.total_amount %>
-    <%= contract.start_date %>
-    <%= contract.end_date %>
-  <% end %>
+<%= link_to 'Solicitar Orçamento', new_budget_path, class: "btn btn-lg btn-primary" %>
+
+<div class="row text-center">
+  <h2>Contratos</h2>
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Próximos do início</h3>
+    </div>
+    <div class="col-md-6">
+      <h3>Próximos do término</h3>
+        <% @near_end_contracts.each do |contract| %>
+          <div class="row col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
+              <div class="panel-heading"><%= contract.customer.name %></div>
+              <div class="panel-body">
+                <div class="row">
+                  <strong>Valor total:</strong> <%= contract.total_amount %>
+                  <strong>Equipamentos:</strong> <%= contract.equipment.size %>
+                </div>
+                <div class="row">
+                  <strong>Início:</strong> <%= contract.start_date %>
+                  <strong>Término:</strong> <%= contract.end_date %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+    </div>
+  </div>
 
   <%= flash[:empty] %>
-
 </div>
