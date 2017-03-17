@@ -4,10 +4,11 @@ feature 'User visits home' do
 
   scenario 'and finds it pimped up' do
 
-    contract1 = build(:contract, start_date: '2017-01-01', rental_period: 2, discount: 0)
-    contract2 = build(:contract, start_date: '2017-02-10', rental_period: 3, discount: 0)
 
     customer = create(:customer)
+    
+    contract1 = build(:contract, start_date: '2017-01-01', rental_period: 2, discount: 0, customer: customer)
+    contract2 = build(:contract, start_date: '2017-02-10', rental_period: 3, discount: 0, customer: customer)
 
     equipment_type1 = create(:equipment_type)
     equipment_type2 = create(:equipment_type)
@@ -17,16 +18,12 @@ feature 'User visits home' do
 
     equipment1_contract1 = create(:equipment, equipment_type: equipment_type1)
     equipment2_contract1 = create(:equipment, equipment_type: equipment_type1)
-    equipment3_contract1 = create(:equipment, equipment_type: equipment_type2)
 
     equipment1_contract2 = create(:equipment, equipment_type: equipment_type2)
     equipment2_contract2 = create(:equipment, equipment_type: equipment_type2)
 
-    contract1.equipment << [equipment1_contract1, equipment2_contract1, equipment3_contract1]
+    contract1.equipment << [equipment1_contract1, equipment2_contract1]
     contract2.equipment << [equipment1_contract2, equipment2_contract2]
-
-    contract1.customer = customer
-    contract2.customer = customer
 
     contract1.save
     contract2.save
@@ -36,7 +33,7 @@ feature 'User visits home' do
     within('div#all-contracts') do
       expect(page).to have_content(contract1.id)
       expect(page).to have_content(contract1.customer.name)
-      expect(page).to have_content("R$ 20,00")
+      expect(page).to have_content("R$ 6,00")
       expect(page).to have_content("01/01/2017")
       expect(page).to have_content("03/01/2017")
 
