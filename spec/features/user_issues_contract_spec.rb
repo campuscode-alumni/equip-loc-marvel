@@ -14,9 +14,9 @@ feature 'User issues contract' do
     equips_type2 = create_list(:equipment, 2, equipment_type: type2)
     equips_type3 = create_list(:equipment, 1, equipment_type: type3)
 
-    customer = create(:customer)
+    customer = create(:customer, name: 'Adriano')
 
-    contract = build(:contract)
+    contract = build(:contract, discount: 0)
 
     visit root_path
 
@@ -37,7 +37,7 @@ feature 'User issues contract' do
 
     click_on 'Emitir Contrato'
 
-    amount = equips_type1.first.equipment_type.price.price + equips_type2.first.equipment_type.price.price + equips_type2.second.equipment_type.price.price
+    amount = equips_type1.first.equipment_type.current_price(contract.rental_period) + equips_type2.first.equipment_type.current_price(contract.rental_period) + equips_type2.second.equipment_type.current_price(contract.rental_period)
 
     expect(page).to have_css('h2', text: customer.name)
     expect(page).to have_content(contract.rental_period)
@@ -55,25 +55,24 @@ feature 'User issues contract' do
     expect(page).to have_content(equips_type1.first.serial_number)
     expect(page).to have_content(equips_type1.first.acquisition_value)
     expect(page).to have_content(equips_type1.first.equipment_type.name)
-    expect(page).to have_content(equips_type1.first.equipment_type.price.price)
+    expect(page).to have_content(equips_type1.first.equipment_type.current_price(contract.rental_period))
 
     expect(page).to have_content(equips_type2.first.name)
     expect(page).to have_content(equips_type2.first.serial_number)
     expect(page).to have_content(equips_type2.first.acquisition_value)
     expect(page).to have_content(equips_type2.first.equipment_type.name)
-    expect(page).to have_content(equips_type2.first.equipment_type.price.price)
+    expect(page).to have_content(equips_type2.first.equipment_type.current_price(contract.rental_period))
 
     expect(page).to have_content(equips_type2.second.name)
     expect(page).to have_content(equips_type2.second.serial_number)
     expect(page).to have_content(equips_type2.second.acquisition_value)
     expect(page).to have_content(equips_type2.second.equipment_type.name)
-    expect(page).to have_content(equips_type2.second.equipment_type.price.price)
+    expect(page).to have_content(equips_type2.second.equipment_type.current_price(contract.rental_period))
 
     expect(page).not_to have_content(equips_type3.first.name)
     expect(page).not_to have_content(equips_type3.first.serial_number)
     expect(page).not_to have_content(equips_type3.first.acquisition_value)
     expect(page).not_to have_content(equips_type3.first.equipment_type.name)
-    expect(page).not_to have_content(equips_type3.first.equipment_type.price.price)
 
   end
 

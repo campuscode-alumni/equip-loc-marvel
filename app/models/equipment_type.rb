@@ -5,9 +5,14 @@ class EquipmentType < ApplicationRecord
   validates :name, presence: true
 
   def current_price(rental_period)
-    # pegar todoso precos, encontrar somente os precos para o mesmo rental_period, e retornar o ultimo preco
-      self.prices.each do |price|
-        self.rental_period += equip.equipment_type.current_price(self.rental_period)
-      end
+    rental_period_prices = self.prices.select do |price|
+        price.rental_period == rental_period
+    end
+    if rental_period_prices.any?
+      rental_period_prices.last.price
+    else
+      0
+    end
+
   end
 end
